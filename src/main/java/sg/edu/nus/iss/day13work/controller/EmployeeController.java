@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -53,5 +54,38 @@ public class EmployeeController {
         model.addAttribute("savedEmployee", employeeForm);
 
         return "success";
+    }
+
+    @GetMapping("/employeedelete/{email}")
+    public String deleteEmployee(@PathVariable("email") String email) {
+
+        Employee emp = empRepo.findByEmail(email);
+
+        Boolean bResult = empRepo.delete(emp);
+
+        return "redirect:/employees/list";
+
+    }
+
+    @GetMapping("/employeeupdate/{email}")
+    public String updateEmployee(@PathVariable("email") String email, Model model) {
+
+        Employee emp = empRepo.findByEmail(email);
+
+        model.addAttribute("employee", emp);
+
+        return "employeeupdate";
+
+    }
+
+    @PostMapping("/updEmployee")
+    public String updateEmployeeRecord(@ModelAttribute("employee") Employee emp, BindingResult result, Model model) {
+
+        if(result.hasErrors()) {
+            return "employeeupdate";
+        }
+
+        empRepo.updateEmployee(emp);
+        return "redirect:/employees/list";
     }
 }

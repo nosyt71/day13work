@@ -11,10 +11,10 @@
     <div class="container">
         <a th:href="@{/employees/list}" class="btn btn-primary">Back to Employee Listing</a>
         <br><br>
-        <h1>Add New Employee</h1>
+        <h1>Update Employee Information</h1>
         <hr>
 
-        <form method="POST" th:action="@{/employees/saveEmployee}" th:object="${employee}">
+        <form method="POST" th:action="@{/employees/updEmployee}" th:object="${employee}">
             <div class="mb-3">
                 <label for="firstname" class="form-label">First Name</label>
                 <input type="text" class="form-control" name="firstName" th:field="*{firstName}"/>
