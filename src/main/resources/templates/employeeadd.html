@@ -9,11 +9,11 @@
 </head>
 <body>
     <div class="container">
-        <a th:ref="@{/employees/list}" class="btn btn-primary">Back to Employee Listing</a>
+        <a th:href="@{/employees/list}" class="btn btn-primary">Back to Employee Listing</a>
         <br><br>
         <h1>Add New Employee</h1>
         <hr>
-        
+
         <form method="POST" th:action="@{/employees/saveEmployee}" th:object="${employee}">
             <div class="mb-3">
                 <label for="firstname" class="form-label">First Name</label>

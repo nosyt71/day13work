@@ -3,6 +3,11 @@ package sg.edu.nus.iss.day13work.repo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,6 +69,21 @@ public class EmployeeRepo {
 
     public Employee findByEmail(String email) {
         return employees.stream().filter(emp -> emp.getEmail().equals(email)).findFirst().get();
+    }
+
+    public Boolean save(Employee employee) throws FileNotFoundException {
+        Boolean result = false;
+
+        result = employees.add(employee);
+
+        File f = new File(dirPath + "/" + filename);
+        OutputStream os = new FileOutputStream(f, true);
+        PrintWriter pw = new PrintWriter(os);
+        pw.println(employee.toString());
+        pw.flush();
+        pw.close();
+
+        return result;
     }
 
     public Boolean updateEmployee(Employee employee) {
