@@ -72,7 +72,7 @@ public class EmployeeRepo {
         // retrieve object originally in storage
         Employee empObj = employees.stream().filter(emp -> emp.getEmail().equals(employee.getEmail())).findFirst().get();
 
-        int employeeIndex = employees.indexOf(employee);
+        int employeeIndex = employees.indexOf(empObj);
 
         if (employeeIndex >= 0 ) {
             //perform update
